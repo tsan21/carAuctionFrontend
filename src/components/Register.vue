@@ -11,8 +11,21 @@
       dense
     >
       <v-toolbar-title>Register</v-toolbar-title>
-
     </v-app-bar>
+
+    <v-card-subtitle
+        style=" height: 70px;
+        font-size: 20px;"
+    >
+        Already have an account?
+        <v-btn
+          color="#42b983"
+          text
+          @click="showLoginHideRegister"
+        >
+          sign in here
+        </v-btn>
+    </v-card-subtitle>
 
     <v-text-field
         v-model="name"
@@ -41,7 +54,7 @@
         v-model="confirmPassword"
         :type="showPassword ? 'text' : 'password'"
         :error-messages="confirmPasswordErrors"
-        label="Password"
+        label="Confirm password"
         required
         @input="$v.confirmPassword.$touch()"
         @blur="$v.confirmPassword.$touch()"
@@ -49,7 +62,7 @@
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="showPassword = !showPassword"
     />
-    
+
     <v-btn
         style=
         "background-color: #42b983;
@@ -87,6 +100,14 @@
       status: null,
       showPassword: false
     }),
+
+    methods: {
+        showLoginHideRegister(){
+            this.$parent.showLoginHideRegister();
+        },
+
+    },
+
     computed:{
         nameErrors() {
             const errors = [];
@@ -108,9 +129,11 @@
             const errors = [];
             if (!this.$v.confirmPassword.$dirty) return errors;
             !this.$v.confirmPassword.sameAsPassword &&
-                errors.push("Password must be at least 8 characters long");
+                errors.push("Passwords must match");
             return errors;
-        }
-    }
+        },
+
+    },
+
   }
 </script>

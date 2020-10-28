@@ -1,19 +1,35 @@
 <template>
   <div class="registerLogin">
-    <Register/>
-    <!-- <Login/> -->
+    <Register v-if="showRegister"/>
+    <Login v-if="showLogin"/>
   </div>
 </template>
 
 <script>
 import Register from '@/components/Register.vue'
-// import Login from '@/components/Login.vue'
+import Login from '@/components/Login.vue'
 
 export default {
   name: 'Home',
   components: {
     Register,
-    // Login
-  }
+    Login
+  },
+
+  data: function(){
+    return {
+      showLogin: false,
+      showRegister: true,
+    }
+  },
+
+  methods: {
+    showLoginHideRegister(){
+      this.showLogin = true;
+      this.showRegister = false;
+    },
+
+  },
+  
 }
 </script>

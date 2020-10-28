@@ -1,44 +1,55 @@
 <template>
- <v-app id="inspire">
-    <v-card
-      class="mx-auto"
-      max-width="400"
-    >
-      <v-img
-        class="white--text align-end"
-        height="200px"
-        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-      >
-        <v-card-title>Top 10 Australian beaches</v-card-title>
-      </v-img>
-  
-      <v-card-subtitle class="pb-0">
-        Number 10
-      </v-card-subtitle>
-  
-      <v-card-text class="text--primary">
-        <div>Whitehaven Beach</div>
-  
-        <div>Whitsunday Island, Whitsunday Islands</div>
-      </v-card-text>
-  
-      <v-card-actions>
-        <v-btn
-          color="orange"
-          text
+  <v-card class="mx-auto" max-width="1500" color="#f0f0f0" style="margin-top:35px;">
+    <v-container fluid>
+      <v-row dense>
+        <v-col
+          v-for="auction in auctions"
+          :key="auction.name"
+          cols="12"
+          md="3"
+          sm="3"
+          xs="12"
+          style="margin-top:-10px;"
         >
-          Share
-        </v-btn>
-  
-        <v-btn
-          color="orange"
-          text
-        >
-          Explore
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-app>
+        
+          <v-card>
+            <v-app-bar
+              color="#ffffff"
+              dense
+            >
+              <v-icon style="margin-right:10px">mdi-clock</v-icon>
+              {{auction.dateEnd}}
+              <v-spacer></v-spacer>
+              Bid: 5000555555555  
+
+          </v-app-bar>
+            <v-img
+              :src="'https://www.topgear.com/sites/default/files/images/cars-road-test/2016/12/e1ba2cc73ababb8dcd812ea33400c79d/row_4863.jpg'"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+              height="200px"
+            >
+
+            </v-img>
+
+            <v-card-title v-text="auction.name"></v-card-title>
+
+            <v-card-subtitle style="text-align: left;">
+             1337 miles
+            </v-card-subtitle>
+
+            <v-btn 
+              text
+              color="#42b983"
+            >
+            View auction
+            </v-btn>
+
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
 </template>
 
 <script>
@@ -48,13 +59,22 @@
     data: () => ({
       auctions: [
         {
-          name: 'bmw',
+          name: 'BMW', dateEnd: 55,
         },
         {
-          name: 'mercedes',
+          name: 'Mercedes', dateEnd: 555,
         },
         {
-          name: 'ferrari',
+          name: 'Ferrari', dateEnd: 444,
+        },
+        {
+          name: 'Lamborghini', dateEnd: 333,
+        },
+        {
+          name: 'Porsche', dateEnd: 22,
+        },
+        {
+          name: 'Nissan', dateEnd: 333,
         },
       ],
     }),

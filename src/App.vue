@@ -1,11 +1,14 @@
 <template>
   <div id="app">
-      <v-app-bar>
+      <v-app-bar
+      color="#ffffff"
+      >
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-toolbar-title style="margin-left: 2px;">Car Auction</v-toolbar-title>
         <router-link style="text-decoration: none; color: inherit;" to="/">
         </router-link>
-        <v-tabs >
+
+        <v-tabs>
           <v-tab to="/"> Home </v-tab>
           <v-tab to="/about"> About </v-tab>
         </v-tabs>
@@ -36,10 +39,13 @@
         <v-btn icon>
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
+
       </v-app-bar>
       <router-view></router-view>
   </div>
 </template>
+
+
 
 <style lang="scss">
 
@@ -76,8 +82,8 @@
   font-weight: bold !important;
 }
 
-.theme--light.v-sheet{ // title
-  color: rgba(0, 0, 0, 0.54) !important;
-}
+// .theme--light.v-sheet{ // title
+//   color: rgba(0, 0, 0, 0.54) !important;
+// }
 
 </style>
