@@ -88,7 +88,7 @@
         type="error"
         :value="alertError"
         >
-        User already exists.
+        User already exists or fields are empty.
     </v-alert>
 
     </v-card>
@@ -133,14 +133,14 @@
             })
             .then(response => {
             console.log(response.status);
-            if (response.status !== 204) {
+            if (response.status == 201) {
+                console.log("created")
               this.alertError = false
               this.alertSucces = true
             }
-            else{
+            else {
                 this.alertError = true
                 this.alertSucces = false
-                console.log("User already exists.")
             }
           })
         }
