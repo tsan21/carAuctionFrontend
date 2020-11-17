@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import Veux from 'veux';
+import Vuex from 'vuex';
 
-Vue.use(Veux);
+Vue.use(Vuex);
 
-export const store = new Veux.Store({
+export const store = new Vuex.Store({
     state: {
         user: {},
     }

@@ -70,9 +70,26 @@
         width: 100px;"
         depressed
         color="primary"
+        @click="register"
         >
         Register
     </v-btn>
+
+    <v-alert
+        outlined
+        type="success"
+        :value="alertSucces"
+        >
+        User has been registered.
+    </v-alert>
+
+    <v-alert
+        outlined
+        type="error"
+        :value="alertError"
+        >
+        User already exists.
+    </v-alert>
 
     </v-card>
 </template>
@@ -98,14 +115,35 @@
       password: "",
       confirmPassword: "",
       status: null,
-      showPassword: false
+      showPassword: false,
+      alertSucces: false,
+      alertError: false,
     }),
 
     methods: {
-        showLoginHideRegister(){
+        showLoginHideRegister: function(){
             this.$parent.showLoginHideRegister();
         },
-
+        register: function(){
+            this.axios
+            .post("http://192.168.178.20:8090/user/",
+            {
+                name: this.name,
+                password: this.password
+            })
+            .then(response => {
+            console.log(response.status);
+            if (response.status !== 204) {
+              this.alertError = false
+              this.alertSucces = true
+            }
+            else{
+                this.alertError = true
+                this.alertSucces = false
+                console.log("User already exists.")
+            }
+          })
+        }
     },
 
     computed:{

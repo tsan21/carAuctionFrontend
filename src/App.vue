@@ -82,10 +82,6 @@
   font-weight: bold !important;
 }
 
-// .theme--light.v-sheet{ // title
-//   color: rgba(0, 0, 0, 0.54) !important;
-// }
-
 </style>
 
 
