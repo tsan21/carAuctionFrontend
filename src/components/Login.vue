@@ -44,9 +44,18 @@
         width: 100px;"
         depressed
         color="primary"
+        @click="login"
         >
         Login
     </v-btn>
+
+    <v-alert
+        outlined
+        type="error"
+        :value="alertError"
+        >
+        Invalid input.
+    </v-alert>
 
     </v-card>
 </template>
@@ -71,9 +80,31 @@
       email: "",
       password: "",
       status: null,
-      showPassword: false
+      showPassword: false,
+      alertError: false,
     }),
-    computed:{
+    methods: {
+      login: function(){
+        this.axios
+          .post("http://192.168.178.20:8090/login/",
+          {
+            name: this.name,
+            password: this.password
+          })
+          .then(response => {
+            this.$store.commit('setUserId', response.data.userId)
+            console.log(this.getCurrentUserId)
+            if (response.status == 200) {
+              this.alertError = false
+              this.$router.push('/')
+            }
+            else {
+              this.alertError = true
+            }
+          })
+      }
+    },
+    computed: {
         nameErrors() {
             const errors = [];
             if (!this.$v.name.$dirty) return errors;
@@ -90,6 +121,9 @@
             !this.$v.password.required && errors.push("Password is required");
             return errors;
         },
+        getCurrentUserId(){
+          return this.$store.getters.getCurrentUserId
+        }
     }
   }
 </script>

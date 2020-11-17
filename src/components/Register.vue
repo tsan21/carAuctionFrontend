@@ -126,7 +126,7 @@
         },
         register: function(){
             this.axios
-            .post("http://192.168.178.20:8090/user/",
+            .post("http://192.168.178.20:8090/register/",
             {
                 name: this.name,
                 password: this.password
@@ -134,7 +134,6 @@
             .then(response => {
             console.log(response.status);
             if (response.status == 201) {
-                console.log("created")
               this.alertError = false
               this.alertSucces = true
             }
