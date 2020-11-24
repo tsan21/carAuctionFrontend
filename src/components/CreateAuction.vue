@@ -1,62 +1,145 @@
 <template>
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="290"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          style="background-color: #42b983; margin-top: 35px"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          Create new auction
-        </v-btn>
-      </template>
+  <v-dialog v-model="dialog" persistent max-width="600px">
 
-      <v-card>
-        <v-card-title class="headline">
+    <template v-slot:activator="{ on, attrs }">
+      <v-btn 
+        style="background-color: #42b983; margin-top: 35px;" 
+        dark  
+        v-bind="attrs" 
+        v-on="on"> 
+        Create new auction
+      </v-btn>
+    </template>
+
+    <v-card>
+      <v-card-title>
+        <span class="headline" style="color: #42b983;">
           Create a new auction
-        </v-card-title>
+        </span>
+      </v-card-title>
 
-        <v-card-text>
-            lorum ipsum
-        </v-card-text>
+      <v-card-text>
+        <v-container>
+          <v-row>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
+            <v-col cols="12" sm="6" md="6">
+              <v-text-field label="Seller name*" required></v-text-field>
+            </v-col>
 
-          <v-btn
-            style="color: #42b983"
-            text
-            @click="dialog = false"
-          >
-            Submit
-          </v-btn>
+            <v-col cols="12" sm="6" md="6">
+              <v-text-field
+                label="Brand*"
+              ></v-text-field>
+            </v-col>
 
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog = false"
-          >
-            Close
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+            <v-col cols="12" sm="6" md="6">
+              <v-text-field
+                label="Model*"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" sm="6" md="6">
+              <v-text-field
+                label="Body style*"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" sm="6" md="6">
+              <v-text-field
+                label="Color**"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" sm="6" md="6">
+              <v-text-field
+                label="Engine*"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" sm="6" md="6">
+              <v-text-field
+                label="Mileage*"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" sm="6" md="6">
+              <v-text-field
+                label="Producion year*"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12">
+              <v-text-field
+                label="Description*"
+                required
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12">
+              <v-text-field
+                label="Image*"
+                required
+              ></v-text-field>
+            </v-col>
+            
+            <v-card-subtitle>
+              Pick an end date*
+            </v-card-subtitle>
+
+            <v-col cols="12">
+              <v-date-picker 
+                v-model="dateStart" 
+                :min="getNowDate">
+              </v-date-picker>
+            </v-col>
+
+          </v-row>
+        </v-container>
+        <small>*indicates required field</small>
+      </v-card-text>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn style="color: #42b983;" text @click="dialog = false">
+          Submit
+        </v-btn>
+        <v-btn color="blue darken-1" text @click="dialog = false"> 
+          close 
+        </v-btn>
+      </v-card-actions>
+
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
 export default {
   data: () => ({
+    form: {  // <-- form start
+      seller: "",
+      description: "",
+      image: "",
+      date: 0,
+      car: {
+        brand: "",
+        model: "",
+        bodyStyle: "",
+        color: "",
+        engine: "",
+        mileage: "",
+        productionYear: 0,
+      },
+      user: {},
+    },      // <-- form end
     dialog: false,
   }),
-  mounted() {
-
-  },
-  computed: {
-
-  },
+  mounted() {},
+  computed: {},
 };
 </script>
