@@ -8,7 +8,7 @@
     <v-container fluid>
       <v-row dense>
         <v-col
-          v-for="auction in auctions"
+          v-for="auction in myAuctions"
           :key="auction.name"
           cols="12"
           md="3"
@@ -21,8 +21,9 @@
               <v-icon style="margin-right: 10px">mdi-clock</v-icon>
               {{ auction.dateEnd }}
               <v-spacer></v-spacer>
-              Highest bid: 9999
+              Highest bid: {{ auction.highestBid }}
             </v-app-bar>
+
             <v-img
               :src="'https://www.topgear.com/sites/default/files/images/cars-road-test/2016/12/e1ba2cc73ababb8dcd812ea33400c79d/row_4863.jpg'"
               class="white--text align-end"
@@ -34,7 +35,7 @@
             <v-card-title v-text="auction.name"></v-card-title>
 
             <v-card-subtitle style="text-align: left">
-              1337 miles
+              {{ auction.mileage }} miles
             </v-card-subtitle>
 
             <v-btn text color="#42b983"> View auction </v-btn>
@@ -47,45 +48,27 @@
 
 <script>
 export default {
-  // name: 'Auction',
-
   data: () => ({
-    auctions: [
+    myAuctions: [
       {
         name: "BMW",
-        dateEnd: 55,
+        dateEnd: 111,
+        highestBid: 59999,
+        mileage: 50000,
       },
       {
         name: "Mercedes",
-        dateEnd: 555,
-      },
-      {
-        name: "Ferrari",
-        dateEnd: 444,
-      },
-      {
-        name: "Lamborghini",
-        dateEnd: 333,
-      },
-      {
-        name: "Porsche",
-        dateEnd: 22,
-      },
-      {
-        name: "Nissan",
-        dateEnd: 333,
+        dateEnd: 222,
+        highestBid: 9999,
+        mileage: 150000,
       },
     ],
   }),
+  mounted() {
+
+  },
+  computed: {
+
+  },
 };
 </script>
-
-<style scoped>
-.content {
-  margin-top: 25px;
-}
-
-.v-card {
-  margin-top: 25px;
-}
-</style>

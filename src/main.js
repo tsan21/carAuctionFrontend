@@ -11,11 +11,6 @@ import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
-// Vue.prototype.$http = VueAxios;
-const token = localStorage.getItem('token')
-if (token) {
-  axios.defaults.headers.common['Authorization'] = token
-}
 
 new Vue({
   vuetify,

@@ -1,17 +1,14 @@
 <template>
-  <div class="home">
-    <Auction/>
-  </div>
+  <Auction />
 </template>
 
 <script>
-// load auction component here.
-import Auction from '@/components/Auction.vue'
+import Auction from "@/components/Auction.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    Auction
-  }
-}
+    Auction,
+  },
+};
 </script>

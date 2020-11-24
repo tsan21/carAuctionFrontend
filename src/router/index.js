@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import MyAuctions from '../views/MyAuctions.vue'
+import RegisterLogin from '../views/RegisterLogin.vue'
 
 Vue.use(VueRouter)
 
@@ -11,14 +13,14 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue')
+    path: '/myAuctions',
+    name: 'MyAuctions',
+    component: MyAuctions
   },
   {
     path: '/registerLogin',
     name: 'RegisterLogin',
-    component: () => import('../views/RegisterLogin.vue')
+    component: RegisterLogin
   }
 ]
 
