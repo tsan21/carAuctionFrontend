@@ -96,7 +96,6 @@ export default {
       this.$store
         .dispatch("register", this.registerModel)
         .catch((err) => console.log(err))
-        console.log(this.$store.getters.token)
     },
   },
 

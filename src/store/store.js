@@ -64,8 +64,15 @@ export const store = new Vuex.Store({
                     console.log(error.response)
                 })
         },
-        // createAuction(context, auctionCreateModel){
-        //     return axios 
-        // }
+        createAuction(context, auctionCreateModel) {
+            return axios
+                .post("http://192.168.178.20:8090/auction/", auctionCreateModel)
+                .then((response) => {
+                    console.log(response.status)
+                })
+                .catch((error) => {
+                    console.log(error.response)
+                })
+        }
     }
 });

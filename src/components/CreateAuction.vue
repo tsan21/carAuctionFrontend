@@ -23,18 +23,24 @@
           <v-row>
 
             <v-col cols="12" sm="6" md="6">
-              <v-text-field label="Seller name*" required></v-text-field>
+              <v-text-field 
+              label="Seller name*" 
+              v-model="form.seller"
+              required>
+            </v-text-field>
             </v-col>
 
             <v-col cols="12" sm="6" md="6">
               <v-text-field
                 label="Brand*"
+                v-model="form.car.brand"
               ></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="6" md="6">
               <v-text-field
                 label="Model*"
+                v-model="form.car.model"
                 required
               ></v-text-field>
             </v-col>
@@ -42,6 +48,7 @@
             <v-col cols="12" sm="6" md="6">
               <v-text-field
                 label="Body style*"
+                v-model="form.car.bodyStyle"
                 required
               ></v-text-field>
             </v-col>
@@ -49,6 +56,7 @@
             <v-col cols="12" sm="6" md="6">
               <v-text-field
                 label="Color**"
+                v-model="form.car.color"
                 required
               ></v-text-field>
             </v-col>
@@ -56,6 +64,7 @@
             <v-col cols="12" sm="6" md="6">
               <v-text-field
                 label="Engine*"
+                v-model="form.car.engine"
                 required
               ></v-text-field>
             </v-col>
@@ -63,6 +72,7 @@
             <v-col cols="12" sm="6" md="6">
               <v-text-field
                 label="Mileage*"
+                v-model="form.car.mileage"
                 required
               ></v-text-field>
             </v-col>
@@ -70,6 +80,7 @@
             <v-col cols="12" sm="6" md="6">
               <v-text-field
                 label="Producion year*"
+                v-model="form.car.productionYear"
                 required
               ></v-text-field>
             </v-col>
@@ -77,6 +88,7 @@
             <v-col cols="12">
               <v-text-field
                 label="Description*"
+                v-model="form.description"
                 required
               ></v-text-field>
             </v-col>
@@ -84,6 +96,7 @@
             <v-col cols="12">
               <v-text-field
                 label="Image*"
+                v-model="form.image"
                 required
               ></v-text-field>
             </v-col>
@@ -94,7 +107,7 @@
 
             <v-col cols="12">
               <v-date-picker 
-                v-model="dateStart" 
+                v-model="form.dateEnd" 
                 :min="getNowDate">
               </v-date-picker>
             </v-col>
@@ -106,7 +119,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn style="color: #42b983;" text @click="dialog = false">
+        <v-btn style="color: #42b983;" text @click="create">
           Submit
         </v-btn>
         <v-btn color="blue darken-1" text @click="dialog = false"> 
@@ -119,27 +132,48 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
+  
   data: () => ({
     form: {  // <-- form start
       seller: "",
       description: "",
       image: "",
-      date: 0,
+      startDate: "",
+      endDate: "",
       car: {
         brand: "",
         model: "",
         bodyStyle: "",
         color: "",
         engine: "",
-        mileage: "",
+        mileage: 0 ,
         productionYear: 0,
       },
-      user: {},
-    },      // <-- form end
+      userId: 0,
+    },       // <-- form end
     dialog: false,
   }),
-  mounted() {},
-  computed: {},
+  mounted() {
+
+  },
+  methods: {
+    create: function(){
+      this.form.dateStart = this.getNowDate
+      this.form.userId = this.$store.getters.user.userId
+      this.$store.dispatch('createAuction', this.form)
+      this.dialog = false
+    }
+  },
+  computed: {
+    getNowDate: function(){
+      var nowDate = new Date();
+      return nowDate
+      ? moment(nowDate).format("L")
+      : "";
+    }
+  },
 };
 </script>
