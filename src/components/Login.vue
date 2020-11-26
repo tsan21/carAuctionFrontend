@@ -67,8 +67,10 @@ export default {
     login: function () {
       this.$store.dispatch("login", this.loginModel)
        .then(() => {
-         this.$router.push('/')
-          console.log("user: "+this.$store.getters.user.userId+" logged in.")
+         if(this.$store.getters.isLoggedIn){
+            this.$router.push('/')
+         }
+            console.log("user: "+this.$store.getters.user.userId+" logged in.")
          })
        .catch(err => console.log(err))
     },

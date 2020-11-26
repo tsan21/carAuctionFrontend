@@ -43,8 +43,10 @@ export const store = new Vuex.Store({
                     password: loginModel.password,
                 })
                 .then((response) => {
-                    context.commit('updateUser', response.data)
-                    context.commit('updateIsLoggedIn')
+                    if (response.status == 200) {
+                        context.commit('updateUser', response.data)
+                        context.commit('updateIsLoggedIn')
+                    }
                 })
                 .catch((error) => {
                     console.log(error.response)
