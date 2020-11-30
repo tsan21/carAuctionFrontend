@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
         userId: 0,
         user: {},
         isLoggedIn: false,
+        myAuctions: [],
     },
 
     getters: {
@@ -21,6 +22,9 @@ export const store = new Vuex.Store({
         isLoggedIn(state) {
             return state.isLoggedIn
         },
+        myAuctions(state) {
+            return state.myAuctions
+        }
     },
 
     mutations: {
@@ -33,6 +37,9 @@ export const store = new Vuex.Store({
         updateIsLoggedIn(state) {
             state.isLoggedIn = !state.isLoggedIn
         },
+        updateMyAuctions(state, _myAuctions) {
+            state.myAuctions = _myAuctions
+        }
     },
 
     actions: {
@@ -62,7 +69,6 @@ export const store = new Vuex.Store({
                     console.log(response.status);
                 })
                 .catch((error) => {
-
                     console.log(error.response)
                 })
         },
@@ -75,6 +81,17 @@ export const store = new Vuex.Store({
                 .catch((error) => {
                     console.log(error.response)
                 })
-        }
+        },
+        loadMyAuctions(context, userId) {
+            return axios
+                .get("http://192.168.178.20:8090/auction/" + userId)
+                .then((response) => {
+                    console.log(response.status);
+                    context.commit('updateMyAuctions', response.data)
+                })
+                .catch((error) => {
+                    console.log(error.response)
+                })
+        },
     }
 });

@@ -8,8 +8,8 @@
     <v-container fluid>
       <v-row dense>
         <v-col
-          v-for="auction in myAuctions"
-          :key="auction.name"
+          v-for="auction in getMyAuctions"
+          :key="auction.auctionId"
           cols="12"
           md="3"
           sm="3"
@@ -19,9 +19,9 @@
           <v-card>
             <v-app-bar color="#ffffff" dense>
               <v-icon style="margin-right: 10px">mdi-clock</v-icon>
-              {{ auction.dateEnd }}
+                {{ auction.dateEnd }}
               <v-spacer></v-spacer>
-              Highest bid: {{ auction.highestBid }}
+                Highest bid: {{ auction.highestBid }}
             </v-app-bar>
 
             <v-img
@@ -32,10 +32,13 @@
             >
             </v-img>
 
-            <v-card-title v-text="auction.name"></v-card-title>
+            <v-card-title 
+              v-text="auction.car.brand + ' ' + auction.car.model"
+              >
+            </v-card-title>
 
             <v-card-subtitle style="text-align: left">
-              {{ auction.mileage }} miles
+              {{ auction.car.mileage }} miles
             </v-card-subtitle>
 
             <v-btn text color="#42b983"> View auction </v-btn>
@@ -49,26 +52,34 @@
 <script>
 export default {
   data: () => ({
-    myAuctions: [
-      {
-        name: "BMW",
-        dateEnd: 111,
-        highestBid: 59999,
-        mileage: 50000,
-      },
-      {
-        name: "Mercedes",
-        dateEnd: 222,
-        highestBid: 9999,
-        mileage: 150000,
-      },
-    ],
+    // myAuctions: [
+    //   {
+    //     name: "BMW",
+    //     dateEnd: 111,
+    //     highestBid: 59999,
+    //     mileage: 50000,
+    //   },
+    //   {
+    //     name: "Mercedes",
+    //     dateEnd: 222,
+    //     highestBid: 9999,
+    //     mileage: 150000,
+    //   },
+    // ],
   }),
   mounted() {
-
+    // this.loadMyAuctions
+    this.$store.dispatch("loadMyAuctions", 1)
+  },
+  methods: {
+    loadMyAuctions: function () {
+      this.$store.dispatch("loadMyAuctions", 1) // change later
+    },
   },
   computed: {
-
+    getMyAuctions: function () {
+      return this.$store.getters.myAuctions;
+    },
   },
 };
 </script>
