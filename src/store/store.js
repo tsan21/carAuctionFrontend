@@ -11,6 +11,8 @@ export const store = new Vuex.Store({
         isLoggedIn: false,
         myAuctions: [],
         allAuctions: [],
+        auctionDialog: false,
+        auctionDetails: {},
     },
 
     getters: {
@@ -29,6 +31,12 @@ export const store = new Vuex.Store({
         allAuctions(state) {
             return state.allAuctions
         },
+        auctionDialog(state) {
+            return state.auctionDialog
+        },
+        auctionDetails(state) {
+            return state.auctionDetails
+        },
     },
 
     mutations: {
@@ -38,14 +46,20 @@ export const store = new Vuex.Store({
         updateUser(state, _user) {
             state.user = _user
         },
-        updateIsLoggedIn(state, bool) {
-            state.isLoggedIn = bool
+        updateIsLoggedIn(state, _bool) {
+            state.isLoggedIn = _bool
         },
         updateMyAuctions(state, _myAuctions) {
             state.myAuctions = _myAuctions
         },
         updateAllAuctions(state, _allAuctions) {
             state.allAuctions = _allAuctions
+        },
+        updateAuctionDialog(state, _bool) {
+            state.auctionDialog = _bool
+        },
+        updateAuctionDetails(state, _auction) {
+            state.auctionDetails = _auction
         },
     },
 

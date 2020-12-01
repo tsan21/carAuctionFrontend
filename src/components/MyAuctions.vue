@@ -41,7 +41,12 @@
               {{ auction.car.mileage }} miles
             </v-card-subtitle>
 
-            <v-btn text color="#42b983"> View auction </v-btn>
+            <v-btn 
+              text color="#42b983"
+              @click="openAuctionDialog(auction)"
+              > 
+              View auction 
+            </v-btn>
           </v-card>
         </v-col>
       </v-row>
@@ -61,6 +66,10 @@ export default {
   methods: {
     returnImg(imageString){
       return imageString
+    },
+    openAuctionDialog: function (auction) {
+      this.$store.commit("updateAuctionDetails", auction)
+      this.$store.commit("updateAuctionDialog", true)
     }
   },
   computed: {
