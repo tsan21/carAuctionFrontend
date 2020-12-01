@@ -8,7 +8,7 @@
 
       <v-tabs>
         <v-tab to="/"> Home </v-tab>
-        <v-tab to="/myAuctions"> My auctions </v-tab>
+        <v-tab v-if="isLoggedIn" to="/myAuctions"> My auctions </v-tab>
       </v-tabs>
 
       <v-text-field
@@ -35,8 +35,11 @@
         Sign up
       </v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
+      <v-btn 
+        icon
+        @click="logout"
+        >
+        <v-icon>mdi-logout-variant</v-icon>
       </v-btn>
     </v-app-bar>
     <router-view></router-view>
@@ -50,8 +53,8 @@ export default {
   }),
   methods: {
     logout: function(){
-      this.$store.dispatch('logout')
-      .then(() => {
+        this.$store.dispatch('logout')
+        .then(() => {
         this.$router.push('/RegisterLogin')
       })
     }

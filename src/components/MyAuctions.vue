@@ -14,18 +14,18 @@
           md="3"
           sm="3"
           xs="12"
-          style="margin-top: -10px"
+          style="margin-top: 10px"
         >
           <v-card>
             <v-app-bar color="#ffffff" dense>
               <v-icon style="margin-right: 10px">mdi-clock</v-icon>
-                {{ auction.dateEnd }}
+                {{ auction.endDate }}
               <v-spacer></v-spacer>
                 Highest bid: {{ auction.highestBid }}
             </v-app-bar>
 
             <v-img
-              :src="'https://www.topgear.com/sites/default/files/images/cars-road-test/2016/12/e1ba2cc73ababb8dcd812ea33400c79d/row_4863.jpg'"
+              :src="returnImg(auction.image)"
               class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="200px"
@@ -52,29 +52,16 @@
 <script>
 export default {
   data: () => ({
-    // myAuctions: [
-    //   {
-    //     name: "BMW",
-    //     dateEnd: 111,
-    //     highestBid: 59999,
-    //     mileage: 50000,
-    //   },
-    //   {
-    //     name: "Mercedes",
-    //     dateEnd: 222,
-    //     highestBid: 9999,
-    //     mileage: 150000,
-    //   },
-    // ],
+    userId: 0,
   }),
   mounted() {
-    // this.loadMyAuctions
-    this.$store.dispatch("loadMyAuctions", 1)
+    this.userId = this.$store.getters.user.userId
+    this.$store.dispatch("loadMyAuctions", this.userId)
   },
   methods: {
-    loadMyAuctions: function () {
-      this.$store.dispatch("loadMyAuctions", 1) // change later
-    },
+    returnImg(imageString){
+      return imageString
+    }
   },
   computed: {
     getMyAuctions: function () {

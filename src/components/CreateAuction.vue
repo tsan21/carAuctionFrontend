@@ -107,7 +107,7 @@
 
             <v-col cols="12">
               <v-date-picker 
-                v-model="form.dateEnd" 
+                v-model="form.endDate" 
                 :min="getNowDate">
               </v-date-picker>
             </v-col>
@@ -132,8 +132,6 @@
 </template>
 
 <script>
-import moment from "moment";
-
 export default {
   
   data: () => ({
@@ -161,7 +159,7 @@ export default {
   },
   methods: {
     create: function(){
-      this.form.dateStart = this.getNowDate
+      this.form.startDate = this.getNowDate
       this.form.userId = this.$store.getters.user.userId
       this.$store.dispatch('createAuction', this.form)
       this.dialog = false
@@ -170,9 +168,7 @@ export default {
   computed: {
     getNowDate: function(){
       var nowDate = new Date();
-      return nowDate
-      ? moment(nowDate).format("L")
-      : "";
+      return nowDate.toISOString().slice(0, 10);
     }
   },
 };

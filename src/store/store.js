@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
         user: {},
         isLoggedIn: false,
         myAuctions: [],
+        allAuctions: [],
     },
 
     getters: {
@@ -24,7 +25,10 @@ export const store = new Vuex.Store({
         },
         myAuctions(state) {
             return state.myAuctions
-        }
+        },
+        allAuctions(state) {
+            return state.allAuctions
+        },
     },
 
     mutations: {
@@ -34,12 +38,15 @@ export const store = new Vuex.Store({
         updateUser(state, _user) {
             state.user = _user
         },
-        updateIsLoggedIn(state) {
-            state.isLoggedIn = !state.isLoggedIn
+        updateIsLoggedIn(state, bool) {
+            state.isLoggedIn = bool
         },
         updateMyAuctions(state, _myAuctions) {
             state.myAuctions = _myAuctions
-        }
+        },
+        updateAllAuctions(state, _allAuctions) {
+            state.allAuctions = _allAuctions
+        },
     },
 
     actions: {
@@ -52,7 +59,7 @@ export const store = new Vuex.Store({
                 .then((response) => {
                     if (response.status == 200) {
                         context.commit('updateUser', response.data)
-                        context.commit('updateIsLoggedIn')
+                        context.commit('updateIsLoggedIn', true)
                     }
                 })
                 .catch((error) => {
@@ -76,7 +83,9 @@ export const store = new Vuex.Store({
             return axios
                 .post("http://192.168.178.20:8090/auction/", auctionCreateModel)
                 .then((response) => {
-                    console.log(response.status)
+                    if(response.status==201){       ///////
+                        context.dispatch('loadMyAuctions', this.getters.user.userId)
+                    }
                 })
                 .catch((error) => {
                     console.log(error.response)
@@ -86,12 +95,26 @@ export const store = new Vuex.Store({
             return axios
                 .get("http://192.168.178.20:8090/auction/" + userId)
                 .then((response) => {
-                    console.log(response.status);
                     context.commit('updateMyAuctions', response.data)
                 })
                 .catch((error) => {
                     console.log(error.response)
                 })
+        },
+        loadAllAuctions(context) {
+            return axios 
+                .get("http://192.168.178.20:8090/auction/")
+                .then((response) => {
+                    context.commit('updateAllAuctions', response.data)
+                })
+                .catch((error) => {
+                    console.log(error.response)
+                })
+        },
+        logout(context) {
+            var emptyUser = {}
+            context.commit('updateUser', emptyUser)
+            context.commit('updateIsLoggedIn', false)
         },
     }
 });
