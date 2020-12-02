@@ -24,10 +24,10 @@
 
             <v-col cols="12" sm="6" md="6">
               <v-text-field 
-              label="Seller name*" 
-              v-model="form.seller"
-              required>
-            </v-text-field>
+                label="Seller name*" 
+                v-model="form.seller"
+                required>
+              </v-text-field>
             </v-col>
 
             <v-col cols="12" sm="6" md="6">

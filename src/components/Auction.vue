@@ -19,9 +19,14 @@
           <v-card>
             <v-app-bar color="#ffffff" dense>
               <v-icon style="margin-right: 10px">mdi-clock</v-icon>
+
                 {{ auction.endDate }}
+
               <v-spacer></v-spacer>
-              Highest bid: {{ auction.highestBid }}
+                Highest bid: 
+
+                {{ auction.highestBid }}
+
             </v-app-bar>
 
             <v-img
