@@ -2,7 +2,7 @@
   <v-dialog v-model="getAuctionDialog" persistent max-width="1000px">
     <v-card>
 
-      <v-app-bar color="#42b983" dense>
+      <v-app-bar color="#DCDCDC" dense>
         <v-icon style="margin-right: 10px">mdi-car-sports</v-icon>
             {{ getAuctionDetails.car.productionYear }}
 
@@ -28,18 +28,28 @@
           </v-col>
 
           <v-col cols="12" sm="6" md="6">
+            
               <v-app-bar 
-                color="#42b983" 
+                color="#DCDCDC" 
                 dense
                 >
                 <v-icon style="margin-right: 10px">mdi-offer</v-icon>
-                Bids:
+                Bids
               <v-spacer></v-spacer>
+              
+              <v-col md="4" style="margin-top: 15px">
+                <v-text-field 
+                  label="bid amount" 
+                  required>
+                </v-text-field>
+              </v-col>
 
               <v-btn 
+                style="background-color: #42b983"
+                dark
                 @click="closeDialog"
                 > 
-                Place Bid 
+                Place bid
               </v-btn>
 
             </v-app-bar>
@@ -52,70 +62,70 @@
 
               <v-list>
                 <v-list-item
-                  v-for="bid in bidders"
+                  v-for="bid in filteredBids"
                   :key="bid.id"
                 >
                 <v-icon style="margin-right: 10px">mdi-account-circle</v-icon>
-                <v-list-item-content>
+
                   <v-list-item-title
-                    v-text="bid.name + ': ' + bid.amount"> 
+                    v-text="bid.name + ': $' + bid.amount"> 
                   </v-list-item-title>
-                </v-list-item-content>
       
                 </v-list-item>
               </v-list>
 
             </v-card>
-          </v-col>
 
-          <v-col cols="12" sm="6" md="6">
-                <p style="font-weight: bold;">
-                    Body style
-                </p>
-                {{ getAuctionDetails.car.bodyStyle }}
-          </v-col>
+            </v-col>
 
-          <v-col cols="12" sm="6" md="6">
-                <p style="font-weight: bold;">
-                    Color
-                </p>
-                {{ getAuctionDetails.car.color }}
-          </v-col>
+            <v-col cols="12" sm="6" md="6">
+                  <p style="font-weight: bold;">
+                      Body style
+                  </p>
+                  {{ getAuctionDetails.car.bodyStyle }}
+            </v-col>
 
-          <v-col cols="12" sm="6" md="6">
-                <p style="font-weight: bold;">
-                    Engine
-                </p>
-                {{ getAuctionDetails.car.engine }}
-          </v-col>
+            <v-col cols="12" sm="6" md="6">
+                  <p style="font-weight: bold;">
+                      Color
+                  </p>
+                  {{ getAuctionDetails.car.color }}
+            </v-col>
 
-          <v-col cols="12" sm="6" md="6">
-                 <p style="font-weight: bold;">
-                    Mileage
-                </p>
-                {{ getAuctionDetails.car.mileage }} miles
-          </v-col>
+            <v-col cols="12" sm="6" md="6">
+                  <p style="font-weight: bold;">
+                      Engine
+                  </p>
+                  {{ getAuctionDetails.car.engine }}
+            </v-col>
 
-          <v-col cols="12">
-                <p style="font-weight: bold;">
-                    Description
-                </p>
-                {{ getAuctionDetails.description }}
-          </v-col>
+            <v-col cols="12" sm="6" md="6">
+                  <p style="font-weight: bold;">
+                      Mileage
+                  </p>
+                  {{ getAuctionDetails.car.mileage }} miles
+            </v-col>
 
-          <v-btn 
-            text 
-            @click="closeDialog"
-            > 
-            Close 
-          </v-btn>
+            <v-col cols="12">
+                  <p style="font-weight: bold;">
+                      Description
+                  </p>
+                  {{ getAuctionDetails.description }}
+            </v-col>
 
-          <v-btn 
-            style="color: #42b983;"
-            v-if="$route.path=='/'" 
-            text> Place bid 
-          </v-btn>
-        </v-row>
+            <v-btn 
+              text 
+              @click="closeDialog"
+              > 
+              Close 
+            </v-btn>
+
+            <v-btn 
+              style="color: #42b983;"
+              v-if="$route.path=='/'" 
+              text> Place bid 
+            </v-btn>
+          </v-row>
 
       </v-container>
 
@@ -134,21 +144,24 @@ export default {
       { "id": 1, "name": "Alice", "amount": 5000 },
       { "id": 2, "name": "Bob", "amount": 3500 },
       { "id": 3, "name": "Charlie", "amount": 7500 },
-      { "id": 4, "name": "Charlie", "amount": 7500 },
-      { "id": 5, "name": "Charlie", "amount": 7500 },
-      { "id": 6, "name": "Charlie", "amount": 7500 },
-      { "id": 7, "name": "Charlie", "amount": 7500 },
-      { "id": 8, "name": "Charlie", "amount": 7500 },
-      { "id": 9, "name": "Charlie", "amount": 7500 },
+      { "id": 4, "name": "Dave", "amount": 9500 },
+      { "id": 5, "name": "Eve", "amount": 6000 },
+      { "id": 6, "name": "Fred", "amount": 6500 },
+      { "id": 7, "name": "Gina", "amount": 4500 },
+      { "id": 8, "name": "Heather", "amount": 5500 },
+      { "id": 9, "name": "Indy", "amount": 8000 },
     ],
+    filteredBids: [],
   }),
-  mounted() {},
+  mounted() {
+    this.filteredBids = this.bidders.sort((a,b)=> (a.amount < b.amount ? 1 : -1))
+  },
   methods: {
       closeDialog: function () {
         this.$store.commit('updateAuctionDialog', false)
       },
       returnImg: function (image) {
-          return image
+        return image
       },
   },
   computed: {
@@ -161,8 +174,8 @@ export default {
       }
     },
     getAuctionDetails: function () {
-        return this.$store.getters.auctionDetails
-    }
+      return this.$store.getters.auctionDetails
+    },
   },
 };
 </script>
