@@ -16,6 +16,12 @@
       </v-app-bar>
 
       <v-container>
+        
+        <v-col cols="12" sm="6" md="6">
+          Seller:
+          {{ getAuctionDetails.seller }}
+        </v-col>
+
         <v-row>
           <v-col cols="12" sm="6" md="6">
             <v-img
@@ -32,6 +38,7 @@
               <v-app-bar 
                 color="#DCDCDC" 
                 dense
+                v-if="$route.path=='/'"
                 >
                 <v-icon style="margin-right: 10px">mdi-offer</v-icon>
                 Bids
@@ -40,14 +47,16 @@
               <v-col md="4" style="margin-top: 15px">
                 <v-text-field 
                   label="bid amount" 
-                  required>
+                  required
+                  v-model="bidPlaceModel.amount"
+                  >
                 </v-text-field>
               </v-col>
 
               <v-btn 
                 style="background-color: #42b983"
                 dark
-                @click="closeDialog"
+                @click="placeBid"
                 > 
                 Place bid
               </v-btn>
@@ -62,13 +71,13 @@
 
               <v-list>
                 <v-list-item
-                  v-for="bid in filteredBids"
-                  :key="bid.id"
+                  v-for="bid in getFilteredBids"
+                  :key="bid.bidId"
                 >
                 <v-icon style="margin-right: 10px">mdi-account-circle</v-icon>
 
                   <v-list-item-title
-                    v-text="bid.name + ': $' + bid.amount"> 
+                    v-text="bid.bidder + ': $' + bid.amount"> 
                   </v-list-item-title>
       
                 </v-list-item>
@@ -119,12 +128,6 @@
               > 
               Close 
             </v-btn>
-
-            <v-btn 
-              style="color: #42b983;"
-              v-if="$route.path=='/'" 
-              text> Place bid 
-            </v-btn>
           </v-row>
 
       </v-container>
@@ -140,29 +143,29 @@
 export default {
   data: () => ({
     dialog: true,
-    bidders: [
-      { "id": 1, "name": "Alice", "amount": 5000 },
-      { "id": 2, "name": "Bob", "amount": 3500 },
-      { "id": 3, "name": "Charlie", "amount": 7500 },
-      { "id": 4, "name": "Dave", "amount": 9500 },
-      { "id": 5, "name": "Eve", "amount": 6000 },
-      { "id": 6, "name": "Fred", "amount": 6500 },
-      { "id": 7, "name": "Gina", "amount": 4500 },
-      { "id": 8, "name": "Heather", "amount": 5500 },
-      { "id": 9, "name": "Indy", "amount": 8000 },
-    ],
-    filteredBids: [],
+    bidPlaceModel: {
+      bidder: "",
+      amount: '',
+      auctionId: 0,
+    },
   }),
   mounted() {
-    this.filteredBids = this.bidders.sort((a,b)=> (a.amount < b.amount ? 1 : -1))
+
   },
   methods: {
-      closeDialog: function () {
-        this.$store.commit('updateAuctionDialog', false)
-      },
-      returnImg: function (image) {
-        return image
-      },
+    closeDialog: function () {
+      this.$store.commit('updateAuctionDialog', false)
+    },
+    returnImg: function (image) {
+      return image
+    },
+    placeBid: function () {
+      this.bidPlaceModel.bidder = this.$store.getters.user.name
+      this.bidPlaceModel.auctionId = this.getAuctionDetails.auctionId
+      this.$store.dispatch('placeBid', this.bidPlaceModel)
+      this.$store.dispatch('loadAllAuctions')
+      this.closeDialog
+    },
   },
   computed: {
     getAuctionDialog: {
@@ -175,6 +178,9 @@ export default {
     },
     getAuctionDetails: function () {
       return this.$store.getters.auctionDetails
+    },
+    getFilteredBids: function () {
+      return this.$store.getters.auctionDetails.bids.slice().sort((a,b)=> (a.amount < b.amount ? 1 : -1)).slice(0)
     },
   },
 };

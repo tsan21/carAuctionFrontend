@@ -4,6 +4,8 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+var baseUrl = "http://192.168.178.20:8090/"
+
 export const store = new Vuex.Store({
     state: {
         userId: 0,
@@ -66,7 +68,7 @@ export const store = new Vuex.Store({
     actions: {
         login(context, loginModel) {
             return axios
-                .post("http://192.168.178.20:8090/login/", {
+                .post(baseUrl + "login/", {
                     name: loginModel.name,
                     password: loginModel.password,
                 })
@@ -82,7 +84,7 @@ export const store = new Vuex.Store({
         },
         register(context, registerModel) {
             return axios
-                .post("http://192.168.178.20:8090/register/", {
+                .post(baseUrl + "register/", {
                     name: registerModel.name,
                     password: registerModel.password,
                 })
@@ -95,9 +97,9 @@ export const store = new Vuex.Store({
         },
         createAuction(context, auctionCreateModel) {
             return axios
-                .post("http://192.168.178.20:8090/auction/", auctionCreateModel)
+                .post(baseUrl + "auction/", auctionCreateModel)
                 .then((response) => {
-                    if(response.status==201){       ///////
+                    if (response.status == 201) {       ///////
                         context.dispatch('loadMyAuctions', this.getters.user.userId)
                     }
                 })
@@ -107,7 +109,7 @@ export const store = new Vuex.Store({
         },
         loadMyAuctions(context, userId) {
             return axios
-                .get("http://192.168.178.20:8090/auction/" + userId)
+                .get(baseUrl + "auction/" + userId)
                 .then((response) => {
                     context.commit('updateMyAuctions', response.data)
                 })
@@ -116,8 +118,8 @@ export const store = new Vuex.Store({
                 })
         },
         loadAllAuctions(context) {
-            return axios 
-                .get("http://192.168.178.20:8090/auction/")
+            return axios
+                .get(baseUrl + "auction/")
                 .then((response) => {
                     context.commit('updateAllAuctions', response.data)
                 })
@@ -130,5 +132,19 @@ export const store = new Vuex.Store({
             context.commit('updateUser', emptyUser)
             context.commit('updateIsLoggedIn', false)
         },
+        placeBid(context, bidPlaceModel) {      ///////
+            return axios
+                .post(baseUrl + "bid/", {
+                    bidder: bidPlaceModel.bidder,
+                    amount: bidPlaceModel.amount,
+                    auctionId: bidPlaceModel.auctionId
+                })
+                .then((response) => {
+                    console.log(response.status)
+                })
+                .catch((error) => {
+                    console.log(error.response)
+                })
+        }
     }
 });
