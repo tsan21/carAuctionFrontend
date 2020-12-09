@@ -76,6 +76,7 @@ export const store = new Vuex.Store({
                     if (response.status == 200) {
                         context.commit('updateUser', response.data)
                         context.commit('updateIsLoggedIn', true)
+                        console.log("user: "+this.getters.user.userId+" logged in.")
                     }
                 })
                 .catch((error) => {

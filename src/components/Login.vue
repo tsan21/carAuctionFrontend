@@ -70,7 +70,6 @@ export default {
          if(this.$store.getters.isLoggedIn){
             this.$router.push('/')
          }
-            console.log("user: "+this.$store.getters.user.userId+" logged in.")
          })
        .catch(err => console.log(err))
     },

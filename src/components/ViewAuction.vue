@@ -64,7 +64,7 @@
             </v-app-bar>
 
             <v-card 
-              style="overflow-y: scroll" 
+              style="overflow-y: auto" 
               class="mx-auto" 
               max-height="200px" 
               min-height="200px">
@@ -177,10 +177,13 @@ export default {
       }
     },
     getAuctionDetails: function () {
-      return this.$store.getters.auctionDetails
+      if (this.$store.getters.auctionDetails != null) {
+        return this.$store.getters.auctionDetails
+      }
+      return null
     },
     getFilteredBids: function () {
-      return this.$store.getters.auctionDetails.bids.slice().sort((a,b)=> (a.amount < b.amount ? 1 : -1)).slice(0)
+      return this.$store.getters.auctionDetails.bids.slice().sort((a,b)=> (a.amount < b.amount ? 1 : -1))
     },
   },
 };
