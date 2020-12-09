@@ -29,6 +29,7 @@
           width: 100px;
         "
         depressed
+        id="btnSignUp"
         color="primary"
         @click="() => $router.push('RegisterLogin')"
       >
