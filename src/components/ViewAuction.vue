@@ -29,13 +29,13 @@
               height="250px"
               width="450px"
               :src="returnImg(getAuctionDetails.image)"
-            >
+              >
             </v-img>
           </v-col>
 
           <v-col cols="12" sm="6" md="6">
             
-              <v-app-bar 
+            <v-app-bar 
                 color="#DCDCDC" 
                 dense
                 v-if="$route.path=='/'"
@@ -75,17 +75,16 @@
                   :key="bid.bidId"
                 >
                 <v-icon style="margin-right: 10px">mdi-account-circle</v-icon>
-
                   <v-list-item-title
+
                     v-text="bid.bidder + ': $' + bid.amount"> 
+
                   </v-list-item-title>
-      
                 </v-list-item>
               </v-list>
-
             </v-card>
 
-            </v-col>
+          </v-col>
 
             <v-col cols="12" sm="6" md="6">
                   <p style="font-weight: bold;">
@@ -128,8 +127,8 @@
               > 
               Close 
             </v-btn>
-          </v-row>
 
+          </v-row>
       </v-container>
 
     </v-card>
@@ -177,10 +176,7 @@ export default {
       }
     },
     getAuctionDetails: function () {
-      if (this.$store.getters.auctionDetails != null) {
-        return this.$store.getters.auctionDetails
-      }
-      return null
+      return this.$store.getters.auctionDetails
     },
     getFilteredBids: function () {
       return this.$store.getters.auctionDetails.bids.slice().sort((a,b)=> (a.amount < b.amount ? 1 : -1))

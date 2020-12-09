@@ -100,7 +100,7 @@ export const store = new Vuex.Store({
             return axios
                 .post(baseUrl + "auction/", auctionCreateModel)
                 .then((response) => {
-                    if (response.status == 201) {       ///////
+                    if (response.status == 201) {
                         context.dispatch('loadMyAuctions', this.getters.user.userId)
                     }
                 })

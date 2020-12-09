@@ -3,7 +3,6 @@
     <Auction />
     <ViewAuction />
   </div>
-
 </template>
 
 <script>
@@ -14,7 +13,7 @@ export default {
   name: "Home",
   components: {
     Auction,
-    ViewAuction
+    ViewAuction,
   },
 };
 </script>

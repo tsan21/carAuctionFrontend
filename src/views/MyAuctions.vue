@@ -22,7 +22,15 @@ export default {
 
   }),
   mounted() {
-    
+    this.isEmpty
   },
+  methods: {
+    isEmpty: function () {
+      if(Object.keys(this.$store.getters.auctionDetails).length===0){
+        console.log("auctionDetails empty")
+      }
+      console.log(this.$store.getters.auctionDetails)
+    }
+  }
 };
 </script>
