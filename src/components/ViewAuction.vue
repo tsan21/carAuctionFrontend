@@ -122,6 +122,24 @@
             </v-col>
 
             <v-btn 
+              v-if="$route.path=='/myAuctions'"
+              text 
+              > 
+              Edit 
+            </v-btn>
+
+            <v-btn
+              style="color: #F44336;"
+              v-if="$route.path=='/myAuctions'"
+              text
+              @click="deleteAuction"
+              > 
+              Delete 
+            </v-btn>
+
+            <v-spacer></v-spacer>
+
+            <v-btn 
               text 
               @click="closeDialog"
               > 
@@ -142,6 +160,7 @@
 export default {
   data: () => ({
     dialog: true,
+    auctionId: 0,
     bidPlaceModel: {
       bidder: "",
       amount: '',
@@ -164,6 +183,9 @@ export default {
       this.$store.dispatch('placeBid', this.bidPlaceModel)
       this.$store.dispatch('loadAllAuctions')
       this.closeDialog
+    },
+    deleteAuction: function (){
+      this.$store.dispatch('deleteAuction', this.getAuctionDetails.auctionId)
     },
   },
   computed: {

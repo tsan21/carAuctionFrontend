@@ -76,7 +76,7 @@ export const store = new Vuex.Store({
                     if (response.status == 200) {
                         context.commit('updateUser', response.data)
                         context.commit('updateIsLoggedIn', true)
-                        console.log("user: "+this.getters.user.userId+" logged in.")
+                        console.log("user: " + this.getters.user.userId + " logged in.")
                     }
                 })
                 .catch((error) => {
@@ -146,6 +146,18 @@ export const store = new Vuex.Store({
                 .catch((error) => {
                     console.log(error.response)
                 })
-        }
+        },
+        deleteAuction(context, auctionId) {
+            return axios
+                .delete(baseUrl + "auction/" + auctionId)
+                .then((response) => {
+                    if (response.status == 200) {
+                        context.dispatch('loadMyAuctions', this.getters.user.userId)
+                    }
+                })
+                .catch((error) => {
+                    console.log(error.response)
+                })
+        },
     }
 });
