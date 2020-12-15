@@ -6,7 +6,11 @@
 
     <v-card-subtitle style="height: 70px; font-size: 20px">
       Already have an account?
-      <v-btn color="#42b983" text @click="showLoginHideRegister">
+      <v-btn color="#42b983" 
+        text 
+        @click="showLoginHideRegister"
+        id="btnSignIn"
+        >
         sign in here
       </v-btn>
     </v-card-subtitle>

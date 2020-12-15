@@ -37,6 +37,7 @@
       </v-btn>
 
       <v-btn 
+        id="btnLogout"
         icon
         @click="logout"
         >

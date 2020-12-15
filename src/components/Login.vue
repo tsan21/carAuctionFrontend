@@ -5,6 +5,7 @@
     </v-app-bar>
 
     <v-text-field
+      id="userName"
       v-model="loginModel.name"
       :error-messages="nameErrors"
       label="Name"
@@ -15,6 +16,7 @@
     />
 
     <v-text-field
+      id="password"
       v-model="loginModel.password"
       :type="showPassword ? 'text' : 'password'"
       :error-messages="passwordErrors"
@@ -28,7 +30,9 @@
     />
 
     <v-btn
-      style="background-color: #42b983;
+      id="btnLogin"
+      style=
+        "background-color: #42b983;
         margin-bottom: 20px
         width: 100px;"
       depressed
@@ -69,7 +73,7 @@ export default {
        .then(() => {
          if(this.$store.getters.isLoggedIn){
             this.$router.push('/')
-         }
+           }
          })
        .catch(err => console.log(err))
     },

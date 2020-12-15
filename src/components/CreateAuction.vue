@@ -158,7 +158,7 @@ export default {
 
   },
   methods: {
-    create: function(){
+    create: function () {
       this.form.startDate = this.getNowDate
       this.form.userId = this.$store.getters.user.userId
       this.$store.dispatch('createAuction', this.form)
