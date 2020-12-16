@@ -123,7 +123,8 @@
 
             <v-btn 
               v-if="$route.path=='/myAuctions'"
-              text 
+              text
+              @click="editAuction"
               > 
               Edit 
             </v-btn>
@@ -173,6 +174,9 @@ export default {
   methods: {
     closeDialog: function () {
       this.$store.commit('updateAuctionDialog', false)
+    },
+    editAuction: function () {
+      this.$store.commit('updateEditAuctionDialog', true)
     },
     returnImg: function (image) {
       return image

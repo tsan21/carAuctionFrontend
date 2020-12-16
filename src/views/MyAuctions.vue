@@ -3,6 +3,7 @@
     <CreateAuction/>
     <MyAuctions/>
     <ViewAuction />
+    <EditAuction />
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import CreateAuction from '@/components/CreateAuction.vue'
 import MyAuctions from '@/components/MyAuctions.vue'
 import ViewAuction from "@/components/ViewAuction.vue";
+import EditAuction from "@/components/EditAuction.vue";
 
 export default {
   name: "Home",
@@ -17,6 +19,7 @@ export default {
     CreateAuction,
     MyAuctions,
     ViewAuction,
+    EditAuction,
   },
   data: () => ({
 

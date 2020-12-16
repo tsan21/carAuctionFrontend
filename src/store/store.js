@@ -15,6 +15,7 @@ export const store = new Vuex.Store({
         allAuctions: [],
         auctionDialog: false,
         auctionDetails: {},
+        editAuctionDialog: false,
     },
 
     getters: {
@@ -39,6 +40,9 @@ export const store = new Vuex.Store({
         auctionDetails(state) {
             return state.auctionDetails
         },
+        editAuctionDialog(state) {
+            return state.editAuctionDialog
+        },
     },
 
     mutations: {
@@ -62,6 +66,9 @@ export const store = new Vuex.Store({
         },
         updateAuctionDetails(state, _auction) {
             state.auctionDetails = _auction
+        },
+        updateEditAuctionDialog(state, _bool) {
+            state.editAuctionDialog = _bool
         },
     },
 
@@ -159,5 +166,18 @@ export const store = new Vuex.Store({
                     console.log(error.response)
                 })
         },
+        editAuction(context, auctionEditModel) {
+            return axios
+                .put(baseUrl + "auction/", auctionEditModel)
+                .then((response) => {
+                    if (response.status == 200) {
+                        console.log(response.status)
+                        // context.dispatch('loadMyAuctions', this.getters.user.userId)
+                    }
+                })
+                .catch((error) => {
+                    console.log(error.response)
+                })
+        }
     }
 });
