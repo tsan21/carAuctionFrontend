@@ -185,11 +185,12 @@ export default {
       this.bidPlaceModel.bidder = this.$store.getters.user.name
       this.bidPlaceModel.auctionId = this.getAuctionDetails.auctionId
       this.$store.dispatch('placeBid', this.bidPlaceModel)
-      this.$store.dispatch('loadAllAuctions')
-      this.closeDialog
+      var k = {}
+      this.bidPlaceModel = k
     },
     deleteAuction: function (){
       this.$store.dispatch('deleteAuction', this.getAuctionDetails.auctionId)
+      this.$store.commit('updateAuctionDialog', false)
     },
   },
   computed: {

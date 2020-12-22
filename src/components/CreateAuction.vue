@@ -122,7 +122,7 @@
         <v-btn style="color: #42b983;" text @click="create">
           Submit
         </v-btn>
-        <v-btn color="blue darken-1" text @click="dialog = false"> 
+        <v-btn color="blue darken-1" text @click="closeDialog"> 
           close 
         </v-btn>
       </v-card-actions>
@@ -162,8 +162,11 @@ export default {
       this.form.startDate = this.getNowDate
       this.form.userId = this.$store.getters.user.userId
       this.$store.dispatch('createAuction', this.form)
+      this.closeDialog
+    },
+    closeDialog: function () {
       this.dialog = false
-    }
+    },
   },
   computed: {
     getNowDate: function(){

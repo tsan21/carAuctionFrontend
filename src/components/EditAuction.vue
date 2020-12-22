@@ -132,11 +132,12 @@ export default {
   },
   methods: {
     edit: function () {
-        this.$store.dispatch('editAuction', this.getAuctionDetails)
-        this.$store.commit('updateAuctionDetails', this.getAuctionDetails)
+      this.$store.dispatch('editAuction', this.getAuctionDetails)
+      this.$store.commit('updateAuctionDetails', this.getAuctionDetails)
+      this.$store.commit('updateEditAuctionDialog', false)
     },
     closeDialog: function () {
-        this.$store.commit('updateEditAuctionDialog', false)
+      this.$store.commit('updateEditAuctionDialog', false)
     },
   },
   computed: {

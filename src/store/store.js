@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-var baseUrl = "http://192.168.178.20:8090/"
+var baseUrl = "http://localhost:8090/"
 
 export const store = new Vuex.Store({
     state: {
@@ -69,6 +69,9 @@ export const store = new Vuex.Store({
         },
         updateEditAuctionDialog(state, _bool) {
             state.editAuctionDialog = _bool
+        },
+        updateBidders(state, _bid) {
+            state.auctionDetails.bids.push(_bid)
         },
     },
 
@@ -140,7 +143,7 @@ export const store = new Vuex.Store({
             context.commit('updateUser', emptyUser)
             context.commit('updateIsLoggedIn', false)
         },
-        placeBid(context, bidPlaceModel) {      ///////
+        placeBid(context, bidPlaceModel) {      
             return axios
                 .post(baseUrl + "bid/", {
                     bidder: bidPlaceModel.bidder,
@@ -148,6 +151,7 @@ export const store = new Vuex.Store({
                     auctionId: bidPlaceModel.auctionId
                 })
                 .then((response) => {
+                    context.commit('updateBidders', bidPlaceModel)
                     console.log(response.status)
                 })
                 .catch((error) => {
@@ -178,6 +182,6 @@ export const store = new Vuex.Store({
                 .catch((error) => {
                     console.log(error.response)
                 })
-        }
+        },
     }
 });
