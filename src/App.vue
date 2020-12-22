@@ -19,6 +19,7 @@
         hide-details
         prepend-inner-icon="mdi-magnify"
         label="Search for cars"
+        @change="updateSearch"
       ></v-text-field>
 
       <v-btn
@@ -36,11 +37,7 @@
         Sign up
       </v-btn>
 
-      <v-btn 
-        id="btnLogout"
-        icon
-        @click="logout"
-        >
+      <v-btn id="btnLogout" icon @click="logout">
         <v-icon>mdi-logout-variant</v-icon>
       </v-btn>
     </v-app-bar>
@@ -50,23 +47,25 @@
 
 <script>
 export default {
-  data: () =>({
+  data: () => ({
     search: "",
   }),
   methods: {
-    logout: function(){
-        this.$store.dispatch('logout')
-        .then(() => {
-        this.$router.push('/RegisterLogin')
-      })
-    }
+    logout: function () {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/RegisterLogin");
+      });
+    },
+    updateSearch: function () {
+      this.$store.commit('updateSearch', this.search)
+    },
   },
   computed: {
-    isLoggedIn: function(){
-      return this.$store.getters.isLoggedIn
-    }
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn;
+    },
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -104,5 +103,3 @@ export default {
   font-weight: bold !important;
 }
 </style>
-
-

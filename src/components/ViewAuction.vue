@@ -163,7 +163,7 @@ export default {
     dialog: true,
     auctionId: 0,
     bidPlaceModel: {
-      bidder: "",
+      bidder: '',
       amount: '',
       auctionId: 0,
     },
@@ -182,11 +182,18 @@ export default {
       return image
     },
     placeBid: function () {
-      this.bidPlaceModel.bidder = this.$store.getters.user.name
-      this.bidPlaceModel.auctionId = this.getAuctionDetails.auctionId
-      this.$store.dispatch('placeBid', this.bidPlaceModel)
-      var k = {}
-      this.bidPlaceModel = k
+      if(this.$store.getters.isLoggedIn)
+        {
+          this.bidPlaceModel.bidder = this.getUserName
+          this.bidPlaceModel.auctionId = this.getAuctionDetails.auctionId
+          this.$store.dispatch('placeBid', this.bidPlaceModel)
+          var clearData = {}
+          this.bidPlaceModel = clearData
+        }
+      else 
+        {
+          console.log('Must be logged in to place bids.')
+        }
     },
     deleteAuction: function (){
       this.$store.dispatch('deleteAuction', this.getAuctionDetails.auctionId)
@@ -208,6 +215,9 @@ export default {
     getFilteredBids: function () {
       return this.$store.getters.auctionDetails.bids.slice().sort((a,b)=> (a.amount < b.amount ? 1 : -1))
     },
+    getUserName: function () {
+      return this.$store.getters.user.name
+    }
   },
 };
 </script>

@@ -16,6 +16,7 @@ export const store = new Vuex.Store({
         auctionDialog: false,
         auctionDetails: {},
         editAuctionDialog: false,
+        search: "",
     },
 
     getters: {
@@ -42,6 +43,9 @@ export const store = new Vuex.Store({
         },
         editAuctionDialog(state) {
             return state.editAuctionDialog
+        },
+        search(state) {
+            return state.search
         },
     },
 
@@ -72,6 +76,9 @@ export const store = new Vuex.Store({
         },
         updateBidders(state, _bid) {
             state.auctionDetails.bids.push(_bid)
+        },
+        updateSearch(state, _search) {
+            state.search = _search
         },
     },
 
@@ -176,7 +183,6 @@ export const store = new Vuex.Store({
                 .then((response) => {
                     if (response.status == 200) {
                         console.log(response.status)
-                        // context.dispatch('loadMyAuctions', this.getters.user.userId)
                     }
                 })
                 .catch((error) => {

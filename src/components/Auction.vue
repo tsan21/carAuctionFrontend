@@ -8,7 +8,7 @@
     <v-container fluid>
       <v-row dense>
         <v-col
-          v-for="auction in allAuctions"
+          v-for="auction in filteredAuctions"
           :key="auction.auctionId"
           cols="12"
           md="3"
@@ -72,6 +72,12 @@ export default {
   computed: {
     allAuctions: function () {
       return this.$store.getters.allAuctions
+    },
+    search: function () {
+      return this.$store.getters.search
+    },
+    filteredAuctions: function () {
+      return this.allAuctions.slice().filter(v => v.car.brand.includes(this.search) || v.car.model.includes(this.search))
     }
   },
   methods: {
