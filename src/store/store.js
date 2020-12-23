@@ -150,7 +150,7 @@ export const store = new Vuex.Store({
             context.commit('updateUser', emptyUser)
             context.commit('updateIsLoggedIn', false)
         },
-        placeBid(context, bidPlaceModel) {      
+        placeBid(context, bidPlaceModel) {
             return axios
                 .post(baseUrl + "bid/", {
                     bidder: bidPlaceModel.bidder,
@@ -189,5 +189,16 @@ export const store = new Vuex.Store({
                     console.log(error.response)
                 })
         },
+        createChat(context, chatCreateModel) { // values kloppen
+            return axios
+                .post(baseUrl + "chat/", chatCreateModel)
+                .then((response) => {
+                    console.log(response.status)
+                })
+                .catch((error) => {
+                    console.log(error.response)
+                })
+
+        }
     }
 });

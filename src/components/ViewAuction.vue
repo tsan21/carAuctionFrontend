@@ -138,6 +138,15 @@
               Delete 
             </v-btn>
 
+            <v-btn 
+              style="color: #42b983;"
+              text
+              v-if="$route.path=='/'"
+              @click="messageSeller"
+              > 
+              Message seller 
+            </v-btn>
+
             <v-spacer></v-spacer>
 
             <v-btn 
@@ -167,6 +176,10 @@ export default {
       amount: '',
       auctionId: 0,
     },
+    chatCreateModel:{
+      userId: 0,
+      auctionId: 0,
+    },
   }),
   mounted() {
 
@@ -184,7 +197,7 @@ export default {
     placeBid: function () {
       if(this.$store.getters.isLoggedIn)
         {
-          this.bidPlaceModel.bidder = this.getUserName
+          this.bidPlaceModel.bidder = this.getUser.name
           this.bidPlaceModel.auctionId = this.getAuctionDetails.auctionId
           this.$store.dispatch('placeBid', this.bidPlaceModel)
           var clearData = {}
@@ -198,6 +211,11 @@ export default {
     deleteAuction: function (){
       this.$store.dispatch('deleteAuction', this.getAuctionDetails.auctionId)
       this.$store.commit('updateAuctionDialog', false)
+    },
+    messageSeller: function () {
+      this.chatCreateModel.userId = this.getUser.userId
+      this.chatCreateModel.auctionId = this.getAuctionDetails.auctionId
+      this.$store.dispatch('createChat', this.chatCreateModel)
     },
   },
   computed: {
@@ -215,8 +233,8 @@ export default {
     getFilteredBids: function () {
       return this.$store.getters.auctionDetails.bids.slice().sort((a,b)=> (a.amount < b.amount ? 1 : -1))
     },
-    getUserName: function () {
-      return this.$store.getters.user.name
+    getUser: function () {
+      return this.$store.getters.user
     }
   },
 };
