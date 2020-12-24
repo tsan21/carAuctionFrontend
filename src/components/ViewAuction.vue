@@ -195,7 +195,7 @@ export default {
       return image
     },
     placeBid: function () {
-      if(this.$store.getters.isLoggedIn)
+      if (this.$store.getters.isLoggedIn)
         {
           this.bidPlaceModel.bidder = this.getUser.name
           this.bidPlaceModel.auctionId = this.getAuctionDetails.auctionId
@@ -213,9 +213,17 @@ export default {
       this.$store.commit('updateAuctionDialog', false)
     },
     messageSeller: function () {
-      this.chatCreateModel.userId = this.getUser.userId
-      this.chatCreateModel.auctionId = this.getAuctionDetails.auctionId
-      this.$store.dispatch('createChat', this.chatCreateModel)
+      if (this.$store.getters.isLoggedIn)
+      {
+        this.chatCreateModel.userId = this.getUser.userId
+        this.chatCreateModel.auctionId = this.getAuctionDetails.auctionId
+        this.$store.dispatch('createChat', this.chatCreateModel)
+        this.$router.push("/chats");
+      }
+      else 
+      {
+        console.log('Must be logged in.')
+      }
     },
   },
   computed: {

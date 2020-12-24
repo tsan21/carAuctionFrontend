@@ -189,11 +189,13 @@ export const store = new Vuex.Store({
                     console.log(error.response)
                 })
         },
-        createChat(context, chatCreateModel) { // values kloppen
+        createChat(context, chatCreateModel) {
             return axios
                 .post(baseUrl + "chat/", chatCreateModel)
                 .then((response) => {
-                    console.log(response.status)
+                    if (response.status == 201) {
+                        context.commit('updateAuctionDialog', false)
+                    }
                 })
                 .catch((error) => {
                     console.log(error.response)

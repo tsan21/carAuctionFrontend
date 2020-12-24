@@ -9,6 +9,7 @@
       <v-tabs>
         <v-tab to="/"> Home </v-tab>
         <v-tab v-if="isLoggedIn" to="/myAuctions"> My auctions </v-tab>
+        <v-tab v-if="isLoggedIn" to="/chats"> Chats </v-tab>
       </v-tabs>
 
       <v-text-field

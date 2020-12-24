@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import MyAuctions from '../views/MyAuctions.vue'
 import RegisterLogin from '../views/RegisterLogin.vue'
+import Chats from '../views/Chats.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/registerLogin',
     name: 'RegisterLogin',
     component: RegisterLogin
+  },
+  {
+    path: '/chats',
+    name: 'Chats',
+    component: Chats
   }
 ]
 
