@@ -86,7 +86,7 @@
 
           </v-col>
 
-            <v-col cols="12" sm="6" md="6">
+            <v-col cols="6" sm="3" md="6">
                   <p style="font-weight: bold;">
                       Body style
                   </p>
