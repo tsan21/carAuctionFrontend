@@ -9,12 +9,12 @@
             max-height="600px"
             min-height="600px"
         >
-            <v-app-bar 
+            <v-app-bar
                 color="#42b983" 
                 dense
                 >
                 <v-card-title style="color: white; margin-left: 75px;">
-                    Chats
+                  My chats
                 </v-card-title>
             </v-app-bar>
 
