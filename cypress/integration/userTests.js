@@ -5,10 +5,10 @@ const { and } = require("vuelidate/lib/validators")
 
 describe('User tests', () => {
     const userName = 'tsan'
-    const password = '123'
+    const password = 'tsan'
 
     it('opens register page', () => {
-        cy.visit('http://localhost:8080/RegisterLogin')
+        cy.visit('http://localhost:8081/RegisterLogin')
         cy.contains('Register')
         cy.contains('Already have an account?')
     })

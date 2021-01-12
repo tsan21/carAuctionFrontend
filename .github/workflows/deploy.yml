@@ -5,6 +5,25 @@ on:
             - chat
 
 jobs:
+    build:
+      timeout-minutes: 10
+      runs-on: ubuntu-latest
+
+      strategy:
+        matrix:
+          node-version: [13.2.x]
+
+        steps:
+          - name: Run and test app
+              run: |
+                yarn install
+                yarn build
+                yarn start &
+                yarn test
+                yarn cypress:run
+              env:
+                CI: true
+
     deploy:
         name: Deploy Application
         runs-on: ubuntu-latest
