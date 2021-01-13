@@ -26,10 +26,6 @@ jobs:
 
         - name: Cypress run
           uses: cypress-io/github-action@v1
-          with:
-            build: npm run build
-            start: npm start
-            wait-on: 127.0.0.1:[::1]:8081
 
     deploy:
         name: Deploy Application
