@@ -29,7 +29,7 @@ jobs:
           with:
             build: npm run build
             start: npm start
-            wait-on: http://localhost:8080
+            wait-on: http://192.168.178.20:8080/
 
     deploy:
         name: Deploy Application
