@@ -18,16 +18,14 @@ jobs:
 
     cypress-run:
       runs-on: ubuntu-latest
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       steps:
-        # - run: echo "CI=true" >> $GITHUB_ENV
         - name: Checkout
           uses: actions/checkout@v1
-          env:
-            ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
         - name: Cypress run
           uses: cypress-io/github-action@v1
-          env:
-            ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
     deploy:
         name: Deploy Application
