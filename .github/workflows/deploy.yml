@@ -3,7 +3,8 @@ on:
     push:
         branches:
             - chat
-
+            env: 
+              CI: true
 jobs:
     build:
       runs-on: ubuntu-latest
@@ -23,8 +24,6 @@ jobs:
           uses: actions/checkout@v1
         - name: Cypress run
           uses: cypress-io/github-action@v1
-          env:
-            CI: true
 
     deploy:
         name: Deploy Application
