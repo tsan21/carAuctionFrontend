@@ -3,8 +3,7 @@ on:
     push:
         branches:
             - chat
-          env: 
-            CI: true
+            
 jobs:
     build:
       runs-on: ubuntu-latest
