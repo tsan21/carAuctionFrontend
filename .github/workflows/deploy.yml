@@ -24,9 +24,6 @@ jobs:
 
         - name: Cypress run
           uses: cypress-io/github-action@v1
-          env:
-            CI: true
-            API_URI: 127.0.0.1:80
 
     deploy:
         name: Deploy Application
