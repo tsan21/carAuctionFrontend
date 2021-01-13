@@ -15,6 +15,7 @@ jobs:
             node-version: '12.x'
         - run: npm install
         - run: npm run build --if-present
+        - run: npm run serve
 
     cypress-run:
       runs-on: ubuntu-latest
@@ -24,7 +25,7 @@ jobs:
         - name: Cypress run
           uses: cypress-io/github-action@v1
           with:
-            start: npm run serve
+            start: npm start
             wait-on: http://localhost:8081
             
 
