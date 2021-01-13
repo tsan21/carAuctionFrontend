@@ -21,9 +21,12 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v1
-        - run: npm start & wait-on http://localhost:8081
         - name: Cypress run
           uses: cypress-io/github-action@v1
+          with:
+            build: npm run build
+            start: npm start
+            wait-on: http://localhost:3030
 
     deploy:
         name: Deploy Application
