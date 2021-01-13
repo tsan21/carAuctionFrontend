@@ -5,21 +5,15 @@ on:
             - chat
 
 jobs:
-    build:
-
-      runs-on: ubuntu-latest
-
-      steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - run: npm install
-      - run: npm run build --if-present
-      - run: yarn cypress: run
-        env:
-          CI: true
+  cypress-run:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
 
     deploy:
         name: Deploy Application
