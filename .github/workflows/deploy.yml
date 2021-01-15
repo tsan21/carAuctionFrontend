@@ -29,8 +29,8 @@ jobs:
           uses: cypress-io/github-action@v1
           with:
             start: npm run serve
-            wait-on: http://localhost:8090/
-            config: baseUrl=http://localhost:8090/
+            wait-on: http://localhost:8080/
+            config: baseUrl=http://localhost:8080/
 
     # deploy:
     #     name: Deploy Application
