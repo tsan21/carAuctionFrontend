@@ -8,7 +8,7 @@ describe('User tests', () => {
     const password = 'tsan'
 
     it('opens register page', () => {
-        cy.visit('http://localhost:8081/RegisterLogin')
+        cy.visit('http://localhost:8080/RegisterLogin')
         cy.contains('Register')
         cy.contains('Already have an account?')
     })
