@@ -18,14 +18,14 @@ describe('User tests', () => {
         cy.contains('Login')
     })
 
-    // it('logs user in', () => {
-    //     cy.get('#userName').type(userName)
-    //     cy.get('#password').type(password)
-    //     cy.get('#btnLogin').click()
-    //     cy.location().should((loc) => {
-    //         expect(loc.pathname.toString()).to.eq('/')
-    //     })
-    // })
+    it('logs user in', () => {
+        cy.get('#userName').type(userName)
+        cy.get('#password').type(password)
+        cy.get('#btnLogin').click()
+        cy.location().should((loc) => {
+            expect(loc.pathname.toString()).to.eq('/')
+        })
+    })
 
     it('logs user out', () => {
         cy.get('#btnLogout').click()
