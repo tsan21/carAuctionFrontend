@@ -33,4 +33,9 @@ describe('User tests', () => {
             expect(loc.pathname.toString()).to.eq('/RegisterLogin')
         })
     })
+
+    it('opens home page', () => {
+        cy.visit('http://localhost:8080/')
+        cy.contains('View auction')
+    })
 })
