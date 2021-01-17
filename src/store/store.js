@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-var baseUrl = "http://localhost:8090/"
+var baseUrl = "https://tsan-auction.herokuapp.com/"
 
 export const store = new Vuex.Store({
     state: {
