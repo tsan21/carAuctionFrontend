@@ -13,6 +13,12 @@ describe('User tests', () => {
         cy.contains('Already have an account?')
     })
 
+    it('opens register page 2', () => {
+        cy.visit('http://localhost:8080/RegisterLogin')
+        cy.contains('Register')
+        cy.contains('Already have an account?')
+    })
+
     it('opens login component', () => {
         cy.get('#btnSignIn').click()
         cy.contains('Login')
